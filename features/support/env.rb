@@ -1,22 +1,25 @@
-$:.unshift File.join(File.dirname(__FILE__),'../..')
+ENV['RACK_ENV'] = 'test'
 
-# Use ThoughtBots factory_girl for model factories
-require 'factory_girl'
+$:.unshift File.join(File.dirname(__FILE__),'..','..')
+require 'tweet_later.rb'
+require 'factory_girl'# Use factory_girl for factories
+require 'capybara'
+require 'capybara/cucumber'
+require 'rspec'
 
 # load all factories from RSpec
 Dir["spec/factories/*.rb"].each do |file| 
   require file
 end
 
+Capybara.app = TweetLater
 
-# Stuf that'll later move to the application
-require 'rubygems'
-require 'data_mapper'
+class TweetLaterWorld
+  include Capybara::DSL
+  include RSpec::Expectations
+  include RSpec::Matchers
+end
 
-# A Sqlite3 connection:
-DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/development.db")
-
-AfterConfiguration do |config|
-  DataMapper.finalize
-  DataMapper.auto_upgrade!
+World do
+  TweetLaterWorld.new
 end
