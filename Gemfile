@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'sinatra'
 gem 'bcrypt-ruby', '~> 3.0.0'
-gem 'jquery-rails'
 
 # Views
 gem 'haml'
@@ -10,38 +9,29 @@ gem 'haml'
 # Authentication and Authorization
 gem 'cancan'
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-end
+# Rack additions
+gem 'rack-flash'
+
+# Models
+gem 'data_mapper', "~> 1.2.0"
+gem 'dm-sqlite-adapter'
 
 group :production do
-  gem 'therubyracer', :platform => :ruby
 	gem 'mysql2'
+	gem 'dm-mysql-adapter'
 end
 
 group :test do
-  gem 'cucumber-rails'
-  gem 'rspec-rails'
+  gem 'cucumber'
+  gem 'rspec'
   gem 'database_cleaner'
-  gem 'launchy' # Provides save_and_open_page in rspecs
-  gem 'turn', :require => false
-	gem 'webrat'
-	gem 'factory_girl_rails'
-	gem 'mocha'
+  gem 'capybara'
+  gem 'launchy' # Provides save_and_open_page in specs
+	gem 'factory_girl'
 end
 
 group :development do
 	gem 'capistrano'
 	gem 'sqlite3'
-	gem 'annotate'
-	gem 'nifty-generators'
-	gem 'faker'
-	gem 'spork', '~> 0.9.0.rc'
-	gem 'autotest'
-	gem 'autotest-rails-pure'
-	gem 'autotest-fsevent'
-	gem 'autotest-growl'	
 	gem 'pry'
 end

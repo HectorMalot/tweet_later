@@ -1,3 +1,54 @@
 == TweetLater
 
-This is a simple Rails app that allows users to schedule tweets for later posting.
+This is a simple Sinatra app that allows users to schedule tweets for multiple
+accounts. In the background delayed_job is used to handle scheduled tweets.
+
+== Routes
+
+Sessions
+  /signin  => Sign in using twitter
+  /signout => clear cookie
+
+Tweets
+  /index   => show scheduled and posted tweets
+  /new     => make new tweet
+  /create  => post new tweet
+  /edit    => edit tweet
+  /update  => update tweet
+  /destroy => delete tweet
+  
+TwitterAccounts
+  /index   => Show associated accounts for this user
+  /new     => get a new pair of oauth tokens from twitter
+  /refresh => refresh oauth tokens from twitter
+  /destroy => remove this account from the users accounts
+
+== Models
+
+User
+  :id
+  :name
+  :twitter_uuid
+  has_many :tweets
+  has_many :twitter_accounts
+  - A user logs in using his twitter account, so there is always at least 1
+    TwitterAccount associated
+  
+TwitterAccount
+  :id
+  :name
+  :oauth_token
+  :oauth_token_secret
+  has_many :tweets
+  belongs_to :user
+
+Tweet
+  :id
+  :text
+  :user_id
+  :twitter_account_id
+  :tweet_at
+  belongs_to :user
+  belongs_to :twitter_account
+  #tweet_now
+  #tweet_at
