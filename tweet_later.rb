@@ -2,8 +2,12 @@
 require 'sinatra/base'
 require 'haml'
 require 'lib/models.rb'
+require 'rack-flash'
 
 class TweetLater < Sinatra::Application
+  enable :sessions
+  use Rack::Flash
+  
   get '/' do
     "Hello World"
   end
