@@ -6,11 +6,14 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # Views
 gem 'haml'
 
-# Authentication and Authorization
+# Authentication
+gem 'omniauth-twitter'
+
+# Authorization
 gem 'cancan'
 
 # Rack additions
-gem 'rack-flash'
+gem 'rack-flash3'
 
 # Models
 gem 'data_mapper', "~> 1.2.0"
@@ -28,9 +31,12 @@ group :test do
   gem 'capybara'
   gem 'launchy' # Provides save_and_open_page in specs
 	gem 'factory_girl'
+	gem 'rack-test'
 end
 
 group :development do
+  gem 'thin'
+  gem 'shotgun'
 	gem 'capistrano'
 	gem 'sqlite3'
 	gem 'pry'

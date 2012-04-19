@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
+    %title TweetMan : Manage your Tweets
+    -#%link{:href => "assets/css/bootstrap.min.css", :rel => "stylesheet"}
+    -#%link{:href => "assets/css/base.css", :rel => "stylesheet"}
+  %body
+    = signed_in? ? "sign out" : "sign in"
+    .container
+      .row
+        .span12.content
+          = yield

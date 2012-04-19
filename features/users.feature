@@ -4,23 +4,22 @@ Feature: Authentication
   As a user
   I want to be able to login
 
-  Scenario: User clicks sign in link
+  @current @omniauth-success
+  Scenario: User clicks sign in link with succes
     Given I am not signed in
     And   I am at the homepage
-    When  I click sign in
-    Then  I should be redirected to twitter
+    When  I sign in using twitter with valid credentials
+    Then  I should be signed in
+    And   I should see my dashboard
 
-  Scenario: User signs in with valid credentials
-    Given I am not signed in
-    When  I successfully sign in using twitter
-    Then  I should see my dashboard
-
+  @omniauth-failure
   Scenario: User signs in with invalid credentials
     Given I am not signed in
+    And   I am at the homepage
     When  I try to sign in using twitter with invalid credentials
     Then  I should not be signed in
     And   I should be redirected to the homepage
-    
+
   Scenario: Users signs out
     Given I am signed in
     When  I click the sign out link
