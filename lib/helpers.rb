@@ -21,7 +21,17 @@ module SessionHelper
   end
   
   def current_user
-    @current_user ||= User.get(:token => session[:user_token]) if session[:user_token]
+    @current_user ||= user_from_token
+  end
+  
+  private
+  
+  def user_from_token
+    User.authenticate_with_token(remember_token)
+  end
+  
+  def remember_token
+    session[:user_token] || nil
   end
   
 end

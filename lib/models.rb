@@ -3,7 +3,7 @@ require 'digest'
 
 # setup Sqlite3 connection:
 DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/development.db")
-DataMapper.setup(:default, "sqlite::memory:") if ENV['RACK_ENV'] = 'test'
+DataMapper.setup(:default, "sqlite::memory:") if ENV['RACK_ENV'] == 'test'
 
 class User
   include DataMapper::Resource
@@ -13,7 +13,7 @@ class User
   property :uid,      String, :unique_index => true    # Twitters UUID
   property :token,    String, 
     :length => 32, 
-    :default => lambda { |r, p| Digest::MD5.hexdigest(Random.rand(2**256)) } # A string used as an auth token
+    :default => lambda { |r, p| Digest::MD5.hexdigest(Random.rand(2**256).to_s) } # A string used as an auth token
   property :info,     Object      # A dump of the users OAuth callback
   has n,   :twitter_accounts    # A user can have many twitter accounts
   
@@ -39,6 +39,15 @@ class User
       )
     end
     user
+  end
+  
+  def self.authenticate_with_token(token)
+    return nil if token.nil?
+		self.first(:token => token)
+ 	end
+  
+  def to_s
+    self.name
   end
 end
 
@@ -74,5 +83,5 @@ DataMapper.auto_upgrade!
 #   "description"=>nil,
 #   "urls"=>{"Website"=>nil, "Twitter"=>"http://twitter.com/HectorMalot"}},
 # "credentials"=>
-#  {"token"=>"495033320-Sto7cvaNjGk5TKcDPbQ6oglFDvSVIlCttXn2wuUY",
-#   "secret"=>"qtwegRY42AYMpkxMhyNZxsAav2b7j4h6ukHKk2OJJk"},
+#  {"token"=>"495033320-Sto7cvaNjGktXn2wuUY",
+#   "secret"=>"qtwegRY42AYMpkxMhyNZKk2OJJk"},

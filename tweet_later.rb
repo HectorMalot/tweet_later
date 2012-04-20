@@ -21,10 +21,16 @@ class TweetLater < Sinatra::Application
 
   helpers DefaultHelper, SessionHelper
 
+  #############################################
+  ## The default HOMEPAGE
+  #############################################
   get '/' do
     haml :root
   end
   
+  #############################################
+  ## Everything with AUTHENTICATION
+  #############################################
   get '/sign_in' do
     redirect to('/auth/twitter')
   end
@@ -32,8 +38,14 @@ class TweetLater < Sinatra::Application
   get '/auth/twitter/callback' do
     # Pseudo code
     # Check if a user with the uuid exists
-    # session[:user_token] = "true"
-    haml %(Got successfull authentication!)
+    if @user = User.find_or_create_from_omniauth(request.env['omniauth.auth'])
+      sign_in @user
+      flash[:success] = "Welcome #{@user}!"
+      redirect to('/dashboard')
+    else
+      flash[:error] = "Something went wrong with your twitter authentication"
+      redirect to('/')
+    end
   end
   
   get '/auth/failure' do
@@ -42,5 +54,12 @@ class TweetLater < Sinatra::Application
   
   get '/auth/twitter/deauthorized' do
     haml "Twitter has deauthorized this app."
+  end
+
+  #############################################
+  ## The main DASHBOARD
+  #############################################
+  get '/dashboard' do
+    haml "dashboard"
   end
 end

@@ -1,6 +1,6 @@
 Given /^I am signed in$/ do
-  user = FactoryGirl.create :user
-  sign_in user
+  @user = FactoryGirl.create :user
+  sign_in @user
 end
 
 Given /^I am not signed in$/ do
@@ -9,6 +9,10 @@ end
 
 Given /^I am at the homepage$/ do
   visit('/')
+end
+
+Given /^A user with uid '(\d+)' exists$/ do |uid|
+  FactoryGirl.create(:user, :uid => uid.to_s)
 end
 
 When /^I sign in using twitter with valid credentials$/ do
