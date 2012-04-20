@@ -6,7 +6,11 @@ require 'factory_girl'# Use factory_girl for factories
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
+require 'database_cleaner'
 
+# Setup database cleaning
+DatabaseCleaner.strategy = :truncation
+  
 # load all factories from RSpec
 Dir["spec/factories/*.rb"].each do |file| 
   require file

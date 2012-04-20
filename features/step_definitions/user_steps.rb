@@ -20,7 +20,7 @@ When /^I sign in using twitter with valid credentials$/ do
 end
 
 Then /^I should see my dashboard$/ do
-  pending # express the regexp above with the code you wish you had
+  current_path.should == '/dashboard'
 end
 
 Then /^I should be signed in$/ do

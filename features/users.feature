@@ -4,7 +4,7 @@ Feature: Authentication
   As a user
   I want to be able to login
 
-  @current @omniauth-success
+  @omniauth-success
   Scenario: Existing user clicks sign in link with success
     Given I am not signed in
     And   I am at the homepage
@@ -21,7 +21,7 @@ Feature: Authentication
     Then  I should be signed in
     And   I should see my dashboard
 
-  @omniauth-failure
+  @omniauth-failure @current
   Scenario: User signs in with invalid credentials
     Given I am not signed in
     And   I am at the homepage
@@ -34,3 +34,7 @@ Feature: Authentication
     When  I click the sign out link
     Then  I should be signed out
     And   I should be redirected to the homepage
+    
+  @wip
+  Scenario: User deletes account
+    Given PENDING

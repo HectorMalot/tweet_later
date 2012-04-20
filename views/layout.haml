@@ -6,7 +6,8 @@
     -#%link{:href => "assets/css/bootstrap.min.css", :rel => "stylesheet"}
     -#%link{:href => "assets/css/base.css", :rel => "stylesheet"}
   %body
-    = signed_in? ? "sign out" : "sign in"
+    %p= signed_in? ? "sign out" : "sign in"
+    %p= flash
     .container
       .row
         .span12.content

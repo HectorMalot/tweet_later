@@ -36,8 +36,6 @@ class TweetLater < Sinatra::Application
   end
   
   get '/auth/twitter/callback' do
-    # Pseudo code
-    # Check if a user with the uuid exists
     if @user = User.find_or_create_from_omniauth(request.env['omniauth.auth'])
       sign_in @user
       flash[:success] = "Welcome #{@user}!"
