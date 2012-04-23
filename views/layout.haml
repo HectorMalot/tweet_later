@@ -7,7 +7,7 @@
     -#%link{:href => "assets/css/base.css", :rel => "stylesheet"}
   %body
     %p= signed_in? ? "sign out" : "sign in"
-    %p= flash
+    = haml :_flashes
     .container
       .row
         .span12.content

@@ -25,6 +25,8 @@ class TweetLater < Sinatra::Application
   ## The default HOMEPAGE
   #############################################
   get '/' do
+    flash[:notice] = "hello"
+    flash[:error]  = "world"
     haml :root
   end
   
@@ -47,7 +49,7 @@ class TweetLater < Sinatra::Application
   end
   
   get '/auth/failure' do
-    haml "Oh no, twitter auth failed!"
+    haml :'omniauth/failure'
   end
   
   get '/auth/twitter/deauthorized' do

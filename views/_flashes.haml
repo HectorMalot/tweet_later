@@ -1,0 +1,3 @@
+- [:notice, :info, :warning, :error].each do |key|
+  -if flash.has? key
+    %p{:class => key}= flash[key]

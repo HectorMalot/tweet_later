@@ -19,6 +19,11 @@ When /^I sign in using twitter with valid credentials$/ do
   step %{I click "sign in"}
 end
 
+When /^I try to sign in using twitter with invalid credentials$/ do
+  OmniAuth.config.mock_auth[:twitter] = :authentication_failed
+  step %{I click "sign in"}
+end
+
 Then /^I should see my dashboard$/ do
   current_path.should == '/dashboard'
 end
@@ -27,12 +32,8 @@ Then /^I should be signed in$/ do
   page.should have_content('sign out')
 end
 
-When /^I try to sign in using twitter with invalid credentials$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 Then /^I should not be signed in$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should_not have_content('sign out')
 end
 
 Then /^I should be redirected to the homepage$/ do
@@ -46,6 +47,11 @@ end
 Then /^I should be signed out$/ do
   pending # express the regexp above with the code you wish you had
 end
+
+Then /^I should see an error message$/ do
+  page.should have_content('error')
+end
+
 
 def sign_in(user)
   pending

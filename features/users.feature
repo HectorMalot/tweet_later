@@ -4,7 +4,7 @@ Feature: Authentication
   As a user
   I want to be able to login
 
-  @omniauth-success
+  @omniauth
   Scenario: Existing user clicks sign in link with success
     Given I am not signed in
     And   I am at the homepage
@@ -13,7 +13,7 @@ Feature: Authentication
     Then  I should be signed in
     And   I should see my dashboard
 
-  @omniauth-success
+  @omniauth
   Scenario: New user registers using sign-in link
     Given I am not signed in
     And   I am at the homepage
@@ -21,7 +21,7 @@ Feature: Authentication
     Then  I should be signed in
     And   I should see my dashboard
 
-  @omniauth-failure @current
+  @omniauth @current
   Scenario: User signs in with invalid credentials
     Given I am not signed in
     And   I am at the homepage
