@@ -21,7 +21,7 @@ Feature: Authentication
     Then  I should be signed in
     And   I should see my dashboard
 
-  @omniauth @current
+  @omniauth
   Scenario: User signs in with invalid credentials
     Given I am not signed in
     And   I am at the homepage
@@ -29,12 +29,13 @@ Feature: Authentication
     Then  I should not be signed in
     And   I should see an error message
 
+  @omniauth
   Scenario: Users signs out
     Given I am signed in
     When  I click the sign out link
     Then  I should be signed out
-    And   I should be redirected to the homepage
+    And   I should be at the homepage
     
-  @wip
+  @current
   Scenario: User deletes account
     Given PENDING

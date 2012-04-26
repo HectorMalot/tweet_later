@@ -3,7 +3,14 @@ module DefaultHelper
   def test
     "this is a test helper"
   end
+  
+  def link_to(name, page, html_options={})
+    "<a href='#{page}' #{to_options_string(html_options)}>#{name}</a>"
+  end
 
+  def to_options_string(html_options)
+    html_options.map {|k,v| "#{k}='#{v}'"}.join(' ')
+  end
 end
 
 module SessionHelper

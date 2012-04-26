@@ -24,6 +24,10 @@ When /^I try to sign in using twitter with invalid credentials$/ do
   step %{I click "sign in"}
 end
 
+When /^I click the sign out link$/ do
+  click_link 'sign out'
+end
+
 Then /^I should see my dashboard$/ do
   current_path.should == '/dashboard'
 end
@@ -32,27 +36,25 @@ Then /^I should be signed in$/ do
   page.should have_content('sign out')
 end
 
+Then /^I should be signed out$/ do
+  page.should have_content('sign in')
+end
+
 Then /^I should not be signed in$/ do
   page.should_not have_content('sign out')
 end
 
-Then /^I should be redirected to the homepage$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-When /^I click the sign out link$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I should be signed out$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^I should be at the homepage$/ do
+  current_path.should == '/'
 end
 
 Then /^I should see an error message$/ do
-  page.should have_content('error')
+  page.should have_content('Error')
 end
 
 
 def sign_in(user)
-  pending
+  step %{I am not signed in}
+  step %{I am at the homepage}
+  step %{I sign in using twitter with valid credentials}
 end

@@ -49,11 +49,17 @@ class TweetLater < Sinatra::Application
   end
   
   get '/auth/failure' do
+    flash[:error] = "Error: Your login was rejected"
     haml :'omniauth/failure'
   end
   
   get '/auth/twitter/deauthorized' do
     haml "Twitter has deauthorized this app."
+  end
+  
+  get '/sign_out' do
+    sign_out
+    redirect to('/')
   end
 
   #############################################

@@ -6,7 +6,10 @@
     -#%link{:href => "assets/css/bootstrap.min.css", :rel => "stylesheet"}
     -#%link{:href => "assets/css/base.css", :rel => "stylesheet"}
   %body
-    %p= signed_in? ? "sign out" : "sign in"
+    - if signed_in?
+      = link_to "sign out", '/sign_out'
+    - else
+      = link_to "sign in",  '/sign_in'
     = haml :_flashes
     .container
       .row
