@@ -33,15 +33,15 @@ Then /^I should see my dashboard$/ do
 end
 
 Then /^I should be signed in$/ do
-  page.should have_content('sign out')
+  page.should have_content('Sign out')
 end
 
 Then /^I should be signed out$/ do
-  page.should have_content('sign in')
+  page.should have_content('Sign in')
 end
 
 Then /^I should not be signed in$/ do
-  page.should_not have_content('sign out')
+  page.should_not have_content('Sign out')
 end
 
 Then /^I should be at the homepage$/ do

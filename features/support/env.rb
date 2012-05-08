@@ -22,6 +22,8 @@ class TweetLaterWorld
   include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers
+  RSpec::Mocks::setup(Object.new)
+  
 end
 
 World do

@@ -1,5 +1,10 @@
+Given /^I am at my dashboard$/ do
+  visit '/dashboard'
+end
+
 When /^I post a new tweet$/ do
-  pending # express the regexp above with the code you wish you had
+  fill_in 'tweet', with:'I am tweeting right now'
+  click_button 'Tweet'
 end
 
 Then /^the tweet should be posted immediately$/ do

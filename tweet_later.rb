@@ -5,6 +5,7 @@ require './lib/helpers'
 require 'haml'
 require 'rack-flash'
 require 'omniauth-twitter'
+require 'twitter'
 require './config/initializer'
 
 if ENV['RACK_ENV'] == "development"
@@ -17,6 +18,10 @@ class TweetLater < Sinatra::Application
   use Rack::Flash
   use OmniAuth::Builder do
       provider :twitter, APP_CONFIG[:twitter_api_key],APP_CONFIG[:twitter_api_secret]
+  end
+  Twitter.configure do |config|
+    config.consumer_key = APP_CONFIG[:twitter_api_key]
+    config.consumer_secret = APP_CONFIG[:twitter_api_secret]
   end
 
   helpers DefaultHelper, SessionHelper
@@ -66,6 +71,15 @@ class TweetLater < Sinatra::Application
   ## The main DASHBOARD
   #############################################
   get '/dashboard' do
-    haml "dashboard"
+    haml :dashboard
+  end
+  
+  post '/tweets' do
+    #@client = Twitter::Client.new(
+    #  :oauth_token => "a user's OAuth token",
+    #  :oauth_token_secret => "a user's OAuth secret"
+    #)
+    #@client.update("Tweeting as the authenticated user!")
+    "blaaa"
   end
 end

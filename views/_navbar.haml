@@ -1,0 +1,13 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.brand TweetMan
+      %ul.nav
+        %li= link_to "test1", "#"
+        %li= link_to "test1", "#"
+      %ul.nav.pull-right
+        %li
+          - if signed_in?
+            = link_to "Sign out", '/sign_out'
+          - else
+            = link_to "Sign in",  '/sign_in'

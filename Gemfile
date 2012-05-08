@@ -12,6 +12,9 @@ gem 'omniauth-twitter'
 # Authorization
 gem 'cancan'
 
+# Twitter
+gem 'twitter'
+
 # Rack additions
 gem 'rack-flash3'
 
