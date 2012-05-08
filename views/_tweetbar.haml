@@ -1,9 +1,12 @@
-%form.form-inline
-  %select.chzn-select{id:'tweet_accounts',:'data-placeholder' => "Choose an account..."}
+%form.form-inline{action:'/tweets', method:'post'}
+  %select.chzn-select{id:'tweet_accounts',:'data-placeholder' => "Choose some accounts..."}
+    %option
     %option Something
     %option 1
     %option 2
     %option 3
-  %input.input{type:'text', id:'tweet'}
-  %input.input{type:'text', id:'tweet_time'}
-  %button.btn.btn-primary{type:'submit'} Tweet
+  %input.input{type:'text', id:'tweet', placeholder:"type your tweet"}
+  %input.input{type:'text', id:'tweet_time', placeholder:"schedule your tweet"}
+  %button.btn.btn-primary{type:'submit'}
+    %i.icon-play-circle.icon-white
+    Tweet
